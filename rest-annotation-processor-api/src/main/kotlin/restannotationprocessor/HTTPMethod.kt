@@ -1,4 +1,4 @@
-package io.squark.jsrest4spring
+package io.squark.restannotationprocessor
 
 enum class HTTPMethod {
   GET, POST, PUT, DELETE, PATCH

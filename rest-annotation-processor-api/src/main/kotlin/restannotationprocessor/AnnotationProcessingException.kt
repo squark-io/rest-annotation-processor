@@ -1,3 +1,3 @@
-package io.squark.jsrest4spring
+package io.squark.restannotationprocessor
 
 class AnnotationProcessingException(message: String) : Exception(message)

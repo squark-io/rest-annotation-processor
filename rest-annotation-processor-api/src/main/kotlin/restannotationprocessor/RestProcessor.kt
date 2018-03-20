@@ -1,4 +1,4 @@
-package io.squark.jsrest4spring
+package io.squark.restannotationprocessor
 
 import javax.lang.model.type.TypeMirror
 

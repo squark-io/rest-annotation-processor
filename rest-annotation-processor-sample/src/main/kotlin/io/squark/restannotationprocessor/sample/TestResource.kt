@@ -1,13 +1,16 @@
-package io.squark.jsrest4spring.sample
+package io.squark.restannotationprocessor.sample
 
+import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 
 @RestController
+@CrossOrigin(origins = ["*"])
 class TestResource {
-  @RequestMapping
-  fun stuff(): SomeClass {
+  @RequestMapping("/aSubPath", params = ["aParam"])
+  fun stuff(@RequestParam(required = false) aParam: String): SomeClass {
     val embedded = EmbeddedClass("hejhej")
     return SomeClass("lalala", false, 1L, arrayOf(), listOf(), embedded, listOf(), arrayOf(), listOf(), arrayOf(),
       listOf(), arrayOf(), mapOf(), mapOf(), mapOf(), mapOf())

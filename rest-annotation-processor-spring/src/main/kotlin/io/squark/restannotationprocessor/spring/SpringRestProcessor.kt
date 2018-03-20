@@ -1,6 +1,14 @@
-package io.squark.jsrest4spring
+package io.squark.restannotationprocessor.spring
 
 import com.google.auto.service.AutoService
+import io.squark.restannotationprocessor.BodyParameter
+import io.squark.restannotationprocessor.HTTPMethod
+import io.squark.restannotationprocessor.Parameter
+import io.squark.restannotationprocessor.PathParameter
+import io.squark.restannotationprocessor.QueryParameter
+import io.squark.restannotationprocessor.RestProcessor
+import io.squark.restannotationprocessor.RootNode
+import io.squark.restannotationprocessor.TreeNode
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
@@ -16,7 +24,7 @@ import org.springframework.web.bind.annotation.ValueConstants
 @AutoService(RestProcessor::class)
 class SpringRestProcessor : RestProcessor {
   override fun extractFullPaths(root: RootNode, child: TreeNode): Collection<String> {
-    val paths = mutableListOf<String>()
+    val paths = mutableSetOf<String>()
     if (root.annotation != null) {
       val rootRequestMapping = root.annotation as RequestMapping
       getPaths(rootRequestMapping).forEach { rootPath ->
@@ -53,6 +61,9 @@ class SpringRestProcessor : RestProcessor {
     }
     val childRequestMapping = child.annotation as RequestMapping
     methods.addAll(childRequestMapping.method.map { HTTPMethod.valueOf(it.name) })
+    if (methods.isEmpty()) {
+      methods.add(HTTPMethod.GET)
+    }
     return methods.toList()
   }
 
@@ -102,7 +113,8 @@ class SpringRestProcessor : RestProcessor {
       }
       val requestBody = parameter.getAnnotation(RequestBody::class.java)
       if (requestBody != null) {
-        parameters.add(BodyParameter(parameter.simpleName.toString(), parameter.asType()))
+        parameters.add(
+          BodyParameter(parameter.simpleName.toString(), parameter.asType()))
       }
     }
     return parameters.toList()

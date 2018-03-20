@@ -6,7 +6,7 @@
 
 
     <properties>
-        <version.kotlin>1.2.20</version.kotlin>
+        <version.kotlin>1.2.30</version.kotlin>
         <version.auto-service>1.0-rc4</version.auto-service>
         <version.gson>2.8.2</version.gson>
         <version.spring>1.5.8.RELEASE</version.spring>

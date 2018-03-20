@@ -1,4 +1,4 @@
-package io.squark.jsrest4spring
+package io.squark.restannotationprocessor
 
 import javax.annotation.processing.ProcessingEnvironment
 import javax.lang.model.element.TypeElement
@@ -10,7 +10,7 @@ import javax.lang.model.util.ElementFilter
 
 class TypeUtil(private val processingEnv: ProcessingEnvironment) {
 
-  fun generateJsOutput(rawTypes: List<TypeMirror>): List<String> {
+  fun generateJsOutput(rawTypes: Collection<TypeMirror>): List<String> {
     val transformedTypes = mutableMapOf<String, TransformedType>()
     rawTypes.forEach { transformType(it, transformedTypes) }
     return transformedTypes.map { generateJsOutputForType(it.value) }

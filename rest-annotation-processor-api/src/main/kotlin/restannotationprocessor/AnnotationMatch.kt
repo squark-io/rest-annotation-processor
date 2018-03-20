@@ -1,4 +1,4 @@
-package io.squark.jsrest4spring
+package io.squark.restannotationprocessor
 
 import javax.lang.model.element.Element
 import javax.lang.model.element.TypeElement

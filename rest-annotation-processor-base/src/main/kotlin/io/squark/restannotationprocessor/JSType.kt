@@ -1,4 +1,4 @@
-package io.squark.jsrest4spring
+package io.squark.restannotationprocessor
 
 enum class JSType {
   STRING, NUMBER, BOOLEAN, OBJECT, ARRAY;
